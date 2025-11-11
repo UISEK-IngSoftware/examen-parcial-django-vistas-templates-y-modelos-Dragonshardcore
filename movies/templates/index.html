@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p class="p-2">Bienvenido a Mi Sitio de Películas</p>
+
+    <div class="row">
+       {% for movie in movies %}
+<div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+    <div class="card text-center h-100">
+         {% if movie.image_url %}
+            <img src="{{ movie.image_url }}" class="card-img-top" alt="{{ movie.title }}">
+        {% else %}
+            <img src="https://via.placeholder.com/300x400?text=Sin+Imagen" class="card-img-top" alt="Sin imagen">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">
+                <small class="text-muted">Director: {{ movie.director_name }}</small><br>
+                <small class="text-muted">Año: {{ movie.release_year }}</small><br>
+                <small class="text-muted">Género: {{ movie.genre }}</small>
+            </p>
+            
+
+            
+            <div class="mb-2">
+                <a href="{% url 'movie_details' movie.id %}" class="btn btn-info btn-sm">
+                    Ver Detalles
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+    </div>
+{% endblock content %}
